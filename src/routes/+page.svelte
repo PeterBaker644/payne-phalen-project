@@ -1,2 +1,20 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+  import BigButton from "./big-button.svelte";
+  import Navigator from "./navigator.svelte";
+  import TextBlock from "./text-block.svelte";
+</script>
+
+<div>
+  <Navigator/>
+  <TextBlock title={"The Project"}/>
+  <TextBlock title={"The Problem"}/>
+  <TextBlock title={"The Proposal"}/>
+  <BigButton/>
+</div>
+
+<style>
+  div {
+    display: grid;
+    gap: var(--space);
+  }
+</style>
