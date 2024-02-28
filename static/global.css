@@ -14,12 +14,28 @@
   --oswald: "Oswald", sans-serif;
 
   /* Spacing */
-  --gap: 2.5rem;
+  --edge: 2.5rem;
   --space: 1.4rem;
+  --gap: 1rem;
 }
 
 html {
   font-size: 10px;
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 4rem;
+  line-height: 4rem;
+  height: calc(4rem - 4px);
+}
+
+h3 {
+  font-family: var(--oswald);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 2rem;
+  line-height: 2rem;
 }
 
 button {
@@ -28,8 +44,22 @@ button {
   line-height: 2rem;
 }
 
+
+label {
+  font-family: var(--oswald);
+  font-size: 1.4rem;
+  padding-bottom: 4px;
+}
+
+hr {
+  border: none;
+  border-top: 1px var(--secondary) solid;
+  outline: none;
+  margin: 0.5rem 0;
+}
+
 .container {
-  padding: var(--gap)
+  padding: var(--edge)
 }
 
 .font-small {
@@ -70,4 +100,21 @@ button {
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
+}
+
+.submit-button {
+  --size: 3.5rem;
+  
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  height: calc(var(--size) - 3px);
+  line-height: calc(var(--size) - 3px);
+  background-color: var(--primary);
+  border-radius: var(--size);
+  font-family: var(--bebas);
+  font-weight: 400;
+  font-size: 2rem;
 }

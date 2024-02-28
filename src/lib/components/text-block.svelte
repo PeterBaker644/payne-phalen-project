@@ -15,13 +15,6 @@ section {
   gap: var(--space);
 }
 
-h2 {
-  font-weight: 400;
-  font-size: 4rem;
-  line-height: 4rem;
-  height: calc(4rem - 4px);
-}
-
 p {
   font-size: 1.4rem;
   line-height: 1.4rem;

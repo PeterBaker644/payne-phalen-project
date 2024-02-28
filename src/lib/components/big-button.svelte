@@ -1,10 +1,10 @@
 <script>
-  import ArrowIcon from "../lib/svgs/arrow-icon.svelte";
-  export let text = 'contact my representatives';
+  import ArrowIcon from "$lib/svgs/arrow-icon.svelte";
+  export let page;
 </script>
 
-<button>
-  <span>{text}</span>
+<button disabled>
+  <span>{page ? 'send my message' : 'contact my representatives'}</span>
   <ArrowIcon dimension={24} rotate={0.5}/>
 </button>
 
@@ -27,5 +27,10 @@
       font-size: 2.4rem;
       padding-top: 3px;
     }
+    &:disabled {
+      background-color: var(--secondary);
+      cursor: not-allowed;
+    }
   }
+  
 </style>

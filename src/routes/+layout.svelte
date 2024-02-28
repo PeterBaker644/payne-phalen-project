@@ -4,10 +4,7 @@
 </svelte:head>
 
 <script>
-    import Navigator from "./navigator.svelte";
-
   
-
 </script>
 
 <div class="container">
@@ -30,11 +27,11 @@
 
   .arrow {
     position: relative;
-    width: calc(100vw - var(--gap));
+    right: -1.2s5rem;
+    width: calc(100vw - var(--edge));
     height: 0;
     border-bottom: 6px solid var(--text);
-    margin: 2rem 0rem;
-    margin-left: 2rem;
+    margin: 2rem 0;
   }
 
   .arrow::before {	
