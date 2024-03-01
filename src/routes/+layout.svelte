@@ -4,10 +4,32 @@
 </svelte:head>
 
 <script>
-  
+  import { browser } from '$app/environment';
+
+  const theme = {
+    text: '#000000',
+    background: '#FFFFFF',
+    primary: '#ffe923',
+    secondary: '#D9D9D9',
+    focus: 'blue',
+  }
+
+  let rootElement;
+
+  // if (browser) {
+  //   const root = document.querySelector(':root');
+  //   console.log(getComputedStyle(root).getPropertyValue("--background"));
+  //   root.style.setProperty('--background', '#04724D');
+  // }
+
+  $: rootElement && rootElement.style.setProperty('--text', theme.text);
+  $: rootElement && rootElement.style.setProperty('--background', theme.background);
+  $: rootElement && rootElement.style.setProperty('--primary', theme.primary);
+  $: rootElement && rootElement.style.setProperty('--secondary', theme.secondary);
+  $: rootElement && rootElement.style.setProperty('--focus', theme.focus);
 </script>
 
-<div class="container">
+<div class="container" bind:this={rootElement}>
   <div class="title">
     <h1>Get Outta the Gully</h1>
     <div class="arrow"/>

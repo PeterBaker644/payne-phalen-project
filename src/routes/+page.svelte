@@ -21,7 +21,6 @@
     <Step2/>
     <hr/>
     <Step3/>
-    <hr/>
   {/if}
   <BigButton {page}/>
 </div>
