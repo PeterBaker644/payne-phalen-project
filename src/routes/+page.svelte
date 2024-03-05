@@ -5,24 +5,26 @@
   import Navigator from "./_navigator.svelte";
   import BigButton from "$lib/components/big-button.svelte";
   import TextBlock from "$lib/components/text-block.svelte";
-
-  const page = 'contact';
+  import { page, repSelected, letterComplete } from './stores';
+  $: navToContact = () => $page = 'contact';
 </script>
 
 <div>
   <Navigator/>
-  {#if page === 'info'}
+  {#if $page === 'info'}
     <TextBlock title={"The Project"}/>
     <TextBlock title={"The Problem"}/>
     <TextBlock title={"The Proposal"}/>
+    <BigButton bind:page={$page} enable bind:onPress={navToContact}/>
   {:else}
     <Step1/>
     <hr/>
     <Step2/>
     <hr/>
     <Step3/>
+    <BigButton bind:page={$page} enable={$repSelected && $letterComplete}/>
   {/if}
-  <BigButton {page}/>
+
 </div>
 
 

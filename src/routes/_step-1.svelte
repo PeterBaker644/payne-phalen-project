@@ -1,15 +1,23 @@
 <script>
     import SearchIcon from "$lib/svgs/search-icon.svelte";
-    import {user} from "./stores";
+    import { user, userComplete, location, repStore } from "./stores";
     // Needs access to reps to disable?
     // Needs to have all fields to enable search.
+    $: console.log($userComplete)
+
+    const onSubmit = (e) => {
+      //validation here
+      console.log("Submitting the form:", $user.address);
+      repStore.getLocation($user.address)
+      // 
+    } 
 </script>
 
 <h3>Step 1 - Enter Your Info:</h3>
 
 <p class="font-light">No information entered into this website is stored or used for any purpose other than searching for and contacting your representatives.</p>
 
-<form action="" method="get">
+<form action="" method="get" on:submit|preventDefault={onSubmit}>
   <div class="form-box">
     <label for="name">Name</label>
     <input type="text" name="name" id="name" required bind:value={$user.name}/>
@@ -23,7 +31,7 @@
     <input type="address" name="address" id="address" required bind:value={$user.address}/>
   </div>
   <div class="form-box">
-    <button class="submit-button" type="submit">
+    <button class="submit-button" type="submit" disabled={!$userComplete}>
       <SearchIcon dimension={16}/>
       <span>Find My Representatives</span>
     </button>

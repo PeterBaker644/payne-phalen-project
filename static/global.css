@@ -77,6 +77,15 @@ input:-webkit-autofill {
   -webkit-background-clip: text;
 }
 
+button {
+  background-color: var(--primary);
+}
+
+button:disabled {
+  background-color: var(--secondary);
+  cursor: not-allowed;
+}
+
 label {
   font-family: var(--oswald);
   font-size: 1.4rem;

@@ -1,11 +1,11 @@
 <script>
   import ArrowIcon from "$lib/svgs/arrow-icon.svelte";
-  export let page;
+  export let page, enable, onPress;
 </script>
 
-<button disabled>
-  <span>{page ? 'send my message' : 'contact my representatives'}</span>
-  <ArrowIcon dimension={24} rotate={0.5}/>
+<button disabled={!enable} on:click={onPress}>
+  <span>{page === 'info' ? 'contact my representatives':'send my message'}</span>
+  <ArrowIcon dimension={24} rotate={180}/>
 </button>
 
 <style>
@@ -16,7 +16,7 @@
     justify-content: center;
     gap: 1rem;
     height: calc(var(--size) - 10px);
-    background-color: var(--primary);
+
     border-radius: var(--size);
     margin-top: 0.5rem;
     
@@ -26,10 +26,6 @@
       font-weight: 400;
       font-size: 2.4rem;
       padding-top: 3px;
-    }
-    &:disabled {
-      background-color: var(--secondary);
-      cursor: not-allowed;
     }
   }
   

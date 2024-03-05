@@ -1,14 +1,17 @@
 <script>
 	import Arrow from '$lib/svgs/arrow-icon.svelte';
+  import { page } from './stores';
+  $: selected = (p) => p === $page ? 'selected' : ''; 
+
 </script>
 
 <div class="navigator">
-  <div class="button selected">The Info</div>
+  <button on:click={() => $page = "info"} class={selected('info')}>The Info</button>
     <div class="center">
       <p class="font-small">You Are Here</p>
-      <Arrow dimension={20}/>
+      <Arrow dimension={20} rotate={$page === "info" ? 0 : 180}/>
     </div>
-  <div class="button">Contact Reps</div>
+  <button on:click={() => $page = "contact"} class={selected('contact')}>Contact Reps</button>
 </div>
 
 <style>
@@ -31,7 +34,7 @@
     padding-bottom: 1.5rem;
   }
 
-  .button {
+  button {
     display: flex;
     justify-content: center;
     width: 13rem;
