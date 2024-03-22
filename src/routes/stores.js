@@ -1,12 +1,21 @@
 import { writable, derived } from "svelte/store";
-import { getGeocode } from "../lib/api";
+import { getGeocode, getState } from "../lib/api";
 
 const userInfo = {
-  name:"",
-  email:"",
-  address:""
+  entry: {
+    name: "",
+    email: "",
+    address: "",
+  },
+  computedAddress: {
+    street: "",
+    city: "",
+    state: "",
+    zip: ""
+  },
+  coords: {},
 }
-const userLocation = {};
+
 const mockReps = [
   {
     name: "Atheena Hollins",
@@ -49,31 +58,24 @@ const letterContent = {
   body:""
 }
 const selectReps = mockReps.map(rep => {return {selected: false, ...rep}});
-
-export const location = writable({});
 export const page = writable('info');
 export const user = writable(userInfo);
 export const reps = writable(selectReps);
 export const letter = writable(letterContent);
 export const repSelected = derived(reps, ($reps) => $reps.some(r => r.selected));
 export const letterComplete = derived(letter, ($letter) => (Object.values($letter)).every(l => l?.length > 0));
-export const userComplete = derived(user, ($user) => (Object.values($user)).every(l => l?.length > 0));
+export const userComplete = derived(user, ($user) => (Object.values($user.entry)).every(l => l?.length > 0));
 
-
+const repStore = () => {
   const { subscribe, set, update } = writable([]);
-  
-  export const repStore = {
+
+  return {
     subscribe,
-     getLocation: address => {
-      getGeocode(address).then(({candidates}) => {
-        if (candidates.length > 0) {
-          $user.address = candidates[0];
-          $location = candidates[0].location;
-          console.log($location)
-        } 
-      })
+    getLocation: address => {
+      return getGeocode(address);
     },
-    getReps: () => {
+    getReps: (coords) => {
+      getState(coords)
       //make calls to other apis here
       //transform objects
       //create list
@@ -84,5 +86,6 @@ export const userComplete = derived(user, ($user) => (Object.values($user)).ever
     },
     clearReps: () => set([])
   }
+}
 
-
+export const rStore = repStore();

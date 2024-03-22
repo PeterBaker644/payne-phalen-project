@@ -15,9 +15,6 @@
 </div>
 
 <style>
-  :root {
-    --size: 3.5rem;
-  }
 
   .navigator {
     display: flex;
@@ -39,7 +36,7 @@
     justify-content: center;
     width: 13rem;
     line-height: var(--size);
-    height: calc(var(--size) - 3px);
+    height: calc(var(--size) - 2px);
     border-radius: var(--size);
     background-color: var(--secondary);
     font-family: var(--bebas);
