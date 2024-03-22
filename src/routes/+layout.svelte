@@ -1,9 +1,11 @@
+
 <svelte:head>
   <link rel="stylesheet" href="/reset.css">
   <link rel="stylesheet" href="/global.css">
 </svelte:head>
 
 <script>
+  export const prerender = true;
   import { browser } from '$app/environment';
 
   const theme = {
