@@ -75,13 +75,13 @@ const repStore = () => {
       return getGeocode(address);
     },
     getReps: (coords) => {
-      getState(coords)
+      const res = getState(coords)
       //make calls to other apis here
+      console.log(res);
       //transform objects
       //create list
-      update(reps =>
+      update(reps => res
         // write list to store
-        {}
       )
     },
     clearReps: () => set([])
