@@ -38,9 +38,9 @@ export async function getState(crds){
   const url = `/api/reps?y=${crds.y}&x=${crds.x}`;
 
   try {
-    return res = await fetch(url, {
-      method: 'GET'
-    })
+    const response = await fetch(url)
+    const reps = await response.json();
+    return reps;
   } catch (error) {
     console.error("There has been a problem with your fetch operation:", error);
   }

@@ -67,7 +67,7 @@ export const letterComplete = derived(letter, ($letter) => (Object.values($lette
 export const userComplete = derived(user, ($user) => (Object.values($user.entry)).every(l => l?.length > 0));
 
 const repStore = () => {
-  const { subscribe, set, update } = writable([]);
+  const { subscribe, set, update } = writable({});
 
   return {
     subscribe,
@@ -80,11 +80,11 @@ const repStore = () => {
       console.log(res);
       //transform objects
       //create list
-      update(reps => res
+      update((reps) => { return {reps, ...res} }
         // write list to store
       )
     },
-    clearReps: () => set([])
+    clearReps: () => set({})
   }
 }
 
