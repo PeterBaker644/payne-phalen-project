@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit'
 
-export async function GET({ clientUrl }){
+export async function GET({ url: clientUrl }){
 
   console.log(clientUrl.searchParams)
   const y = clientUrl.searchParams.get('y');
