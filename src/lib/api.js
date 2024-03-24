@@ -35,9 +35,7 @@ export async function getGeocode(address) {
 }
 
 export async function getState(crds){
-  const url = new URL('/api/reps');
-  url.searchParams.append('x', crds.x);
-  url.searchParams.append('y', crds.y);
+  const url = `/api/reps?y=${crds.y}&x=${crds.x}`;
 
   try {
     await fetch(url, {
