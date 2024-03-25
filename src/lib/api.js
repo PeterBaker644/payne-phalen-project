@@ -37,11 +37,14 @@ export async function getGeocode(address) {
 export async function getState(crds){
   const url = `/api/reps?y=${crds.y}&x=${crds.x}`;
 
-  try {+
+  try {
     // console.log("about to send to server")
     // const response = await fetch(url);
     // console.log("response sent, awaiting response")
-    fetch(url).then(res => res.json()).then(reps => console.log("These are the reps: ", reps));
+    return await fetch(url).then(res => res.json()).then(reps => {
+      console.log("These are the reps: ", reps);
+      return reps
+    });
     // const reps = await response.json();
     // if (reps) {console.log(reps)}
     // return reps;
