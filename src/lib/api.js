@@ -40,6 +40,7 @@ export async function getState(crds){
   try {
     const response = await fetch(url)
     const reps = await response.json();
+    if (reps) {console.log(reps)}
     return reps;
   } catch (error) {
     console.error("There has been a problem with your fetch operation:", error);
