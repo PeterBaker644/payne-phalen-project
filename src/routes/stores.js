@@ -55,9 +55,9 @@ const mockReps = [
 ]
 const letterContent = {
   subject: "Reconsider the Rapid Transit Arcade Gully Stop",
-  body:""
+  body: ""
 }
-const selectReps = mockReps.map(rep => {return {selected: false, ...rep}});
+const selectReps = mockReps.map(rep => { return { selected: false, ...rep } });
 export const page = writable('info');
 export const user = writable(userInfo);
 export const reps = writable(selectReps);
@@ -74,14 +74,16 @@ const repStore = () => {
     getLocation: address => {
       return getGeocode(address);
     },
-    getReps: (coords) => {
-      const res = getState(coords)
-      //make calls to other apis here
-      console.log(res);
-      //transform objects
-      //create list
-      update((reps) => { return {reps, ...res} }
-        // write list to store
+    getReps: async (coords) => {
+      return await getState(coords).then(res => {
+          //make calls to other apis here
+          console.log(res);
+          //transform objects
+          //create list
+          update((reps) => { return { reps, ...res } })
+            // write list to store
+          return res
+        }
       )
     },
     clearReps: () => set({})
