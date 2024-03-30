@@ -29,7 +29,8 @@
       // either make the load element here, or set step 2 to show.
       showModal = false;
       getReps(coords).then(res => {
-        reps.set(res);
+        reps.update(() => res);
+        console.log(res);
       })
       // console.log("Test is a test");
     }

@@ -1,17 +1,18 @@
 <script>
-  export let {name, position, district, selected} = person;
+  export let person;
 </script>
 
 <div class="person">
-  <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+  <!-- <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
     <rect width="200" height="200" x="0" y="0" fill={!selected ? "var(--secondary)" : "var(--primary)" } />
-  </svg>
+  </svg> -->
+  <img src={person.image} alt="Italian Trulli">
   <div class="text">
-    <p class="name">{name}</p>
-    <p>{position} - {district}</p>
+    <p class="name">{person.name}</p>
+    <p>{person.position} - {person.district}</p>
   </div>
   <!-- <hr/> -->
-  <input type="checkbox" name="include" bind:checked={selected}>
+  <input type="checkbox" name="include" bind:checked={person.selected}>
 </div>
 
 <style>
@@ -21,6 +22,11 @@
   justify-content: space-between;
   align-items: center;
   gap: var(--space);
+  & img {
+    width: 8rem;
+    height: 8rem;
+    object-fit: cover;
+  }
 }
 
 .text {

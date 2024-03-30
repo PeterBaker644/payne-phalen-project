@@ -2,13 +2,16 @@ import { json } from '@sveltejs/kit'
 
 export async function GET({ url: clientUrl }){
 
-  console.log(clientUrl.searchParams)
   const y = clientUrl.searchParams.get('y');
   const x = clientUrl.searchParams.get('x');
-  const serverUrl = `https://www.gis.lcc.mn.gov/iMaps/districts/php/getPointData.php?lat=${y}&lng=${x}`
+  const arcGisSharedQuery = `query?f=json&returnGeometry=false&spatialRel=esriSpatialRelIntersects&geometry=%7B%22x%22%3A${x}%2C%22y%22%3A${y}%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryPoint&inSR=4326&outFields=*&outSR=4326`
+  const stateUrl = `https://www.gis.lcc.mn.gov/iMaps/districts/php/getPointData.php?lat=${y}&lng=${x}`
+  const metroUrl = `https://arcgis.metc.state.mn.us/arcgis/rest/services/cd/metroDistricts/MapServer/7/${arcGisSharedQuery}`;
+  const wardsUrl = `https://services1.arcgis.com/9meaaHE3uiba0zr8/arcgis/rest/services/Council_Ward_/FeatureServer/0/${arcGisSharedQuery}`;
+  const commissionerUrl = `https://maps.co.ramsey.mn.us/arcgis/rest/services/Elections/ElectionsAndPoliticalBoundaries/MapServer/11/${arcGisSharedQuery}`;
 
   try {
-    const res = await fetch(serverUrl);
+    const res = await fetch(stateUrl);
 
     if (!res.ok) {
       switch (res.status) {
