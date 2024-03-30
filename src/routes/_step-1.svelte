@@ -1,7 +1,8 @@
 <script>
     import SearchIcon from "$lib/svgs/search-icon.svelte";
     import Modal from "../lib/components/modal.svelte";
-    import { user , userComplete, rStore } from "./stores";
+    import { user, userComplete, reps } from "./stores";
+    import { getGeocode, getReps } from "../lib/api";
     // Needs access to reps to disable?
     // Needs to have all fields to enable search.
     $: console.log($userComplete)
@@ -11,13 +12,13 @@
 
     const onSubmit = (e) => {
       //validation here
-      console.log("Submitting the form:", $user.entry.address);
-      rStore.getLocation($user.entry.address).then((res) => {
-        $user.coords = res.location;
-        $user.entry.address = res.address;
-        $user.computedAddress = computeAddress(res.address);
-        showModal = true
-        console.log($user)
+      getGeocode($user.entry.address).then(({location, address}) => {
+        $user = { ...$user,
+          coords: location,
+          entry: { ...$user.entry, address},
+          computedAddress: computeAddress(address)
+        };
+        showModal = true;
       }).catch((error) => {
         isError = true;
         showModal = true
@@ -25,7 +26,11 @@
     }
 
     const onConfirm = (coords) => {
-      rStore.getReps(coords)
+      // either make the load element here, or set step 2 to show.
+      getReps(coords).then(({repArray}) => {
+        reps.set(repArray);
+      })
+      showModal = false;
     }
 
     const computeAddress = (address) => {
@@ -71,13 +76,12 @@
 
 <Modal headerText={"Confirm Your Address"} exitText={isError ? "Go Back" : "Cancel"} bind:showModal>
   <div class='modal-text' slot='content'>
+    <!-- We need to throw and handle and error if the user isn't submitting a MN address -->
     {#if isError} 
       <p>A matching Minnesota address could not be found at this time.</p>
     {:else}
       <p>The following address will be used to retrieve a list of your representatives:</p>
       <div class='address'>
-          <!-- <p>{$user.computedAddress.street}</p>
-          <p>{$user.computedAddress.city + ", " + $user.computedAddress.zip + " " + $user.computedAddress.state}</p> -->
           <p>{$user.entry.address}</p>
       </div>
     {/if}

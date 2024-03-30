@@ -36,10 +36,10 @@ export async function GET({ url: clientUrl }){
         image: `https://www.gis.lcc.mn.gov/iMaps/districts/images/${position}/${rep.district}`,
         url: `https://www.house.mn.gov/members/profile/${rep.memid}`
       }}
-      const stateReps = {
-        stateHouse: repDetail(data?.features[0].properties, "House"),
-        stateSenate: repDetail(data?.features[1].properties, "Senate"),
-      }
+      const stateReps = [
+        repDetail(data?.features[0].properties, "House"),
+        repDetail(data?.features[1].properties, "Senate")
+      ]
       console.log("State Reps: ", stateReps);
       return json(stateReps);
     }
@@ -47,3 +47,4 @@ export async function GET({ url: clientUrl }){
     console.error("There has been a server problem with your fetch operation:", error);
   }
 }
+

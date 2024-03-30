@@ -1,17 +1,17 @@
 <script>
-  export let person;
+  export let {name, position, district, selected} = person;
 </script>
 
 <div class="person">
   <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
-    <rect width="200" height="200" x="0" y="0" fill={!person.selected ? "var(--secondary)" : "var(--primary)" } />
+    <rect width="200" height="200" x="0" y="0" fill={!selected ? "var(--secondary)" : "var(--primary)" } />
   </svg>
   <div class="text">
-    <p class="name">{person.name}</p>
-    <p>{person.position}</p>
+    <p class="name">{name}</p>
+    <p>{position} - {district}</p>
   </div>
   <!-- <hr/> -->
-  <input type="checkbox" name="include" bind:checked={person.selected}>
+  <input type="checkbox" name="include" bind:checked={selected}>
 </div>
 
 <style>
