@@ -27,11 +27,11 @@
 
     const onConfirm = (coords) => {
       // either make the load element here, or set step 2 to show.
-      getReps(coords).then(({repArray}) => {
-        reps.set(repArray);
-      })
-      console.log("Test is a test");
       showModal = false;
+      // getReps(coords).then(res => {
+      //   reps.set(res);
+      // })
+      // console.log("Test is a test");
     }
 
     const computeAddress = (address) => {
@@ -88,7 +88,7 @@
     {/if}
   </div>
   {#if !isError}
-    <button on:click={() => onConfirm($user.coords)} class="small-button">Confirm</button>
+    <button on:click={() => {onConfirm($user.coords)}} class="small-button">Confirm</button>
   {/if}
 </Modal>
 
