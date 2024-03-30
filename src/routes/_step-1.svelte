@@ -30,6 +30,7 @@
       getReps(coords).then(({repArray}) => {
         reps.set(repArray);
       })
+      console.log("Test is a test");
       showModal = false;
     }
 

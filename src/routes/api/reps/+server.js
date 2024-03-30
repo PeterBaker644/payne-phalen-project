@@ -34,7 +34,8 @@ export async function GET({ url: clientUrl }){
         position: "MN " + position,
         district: "District " + rep.district,
         image: `https://www.gis.lcc.mn.gov/iMaps/districts/images/${position}/${rep.district}`,
-        url: `https://www.house.mn.gov/members/profile/${rep.memid}`
+        url: `https://www.house.mn.gov/members/profile/${rep.memid}`,
+        selected: false
       }}
       const stateReps = [
         repDetail(data?.features[0].properties, "House"),
