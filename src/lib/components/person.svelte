@@ -3,10 +3,14 @@
 </script>
 
 <div class="person">
-  <!-- <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
-    <rect width="200" height="200" x="0" y="0" fill={!selected ? "var(--secondary)" : "var(--primary)" } />
-  </svg> -->
-  <img src={person.image} alt="Italian Trulli">
+
+  {#if person?.image}
+    <img src={person.image} alt={`Portrait of ${person.name}`}>
+  {:else}
+    <svg width="8rem" height="8rem" xmlns="http://www.w3.org/2000/svg">
+      <rect width="200" height="200" x="0" y="0" fill={!person.selected ? "var(--secondary)" : "var(--primary)" } />
+    </svg>
+  {/if}
   <div class="text">
     <p class="name">{person.name}</p>
     <p>{person.position} - {person.district}</p>
