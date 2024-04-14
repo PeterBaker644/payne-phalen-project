@@ -12,6 +12,7 @@
 
     const onSubmit = (e) => {
       //validation here
+      isError = false;
       getGeocode($user.entry.address).then(({location, address}) => {
         $user = { ...$user,
           coords: location,
@@ -20,6 +21,7 @@
         };
         showModal = true;
       }).catch((error) => {
+        console.log("There is an error: ", error.message)
         isError = true;
         showModal = true
       });
@@ -28,6 +30,7 @@
     const onConfirm = (coords) => {
       // either make the load element here, or set step 2 to show.
       showModal = false;
+
       getReps(coords).then(res => {
         reps.update(() => res);
         console.log(res);

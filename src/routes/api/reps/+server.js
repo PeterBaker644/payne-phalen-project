@@ -1,4 +1,5 @@
 import { json } from '@sveltejs/kit'
+import { localData, stateHouse, stateSenate } from './rep-data.js';
 
 const fetchUrl = async (url) => {
   const res = await fetch(url);
@@ -14,19 +15,28 @@ const fetchUrl = async (url) => {
   return res.json();
 };
 
-const configureStateReps = (res) => {    
-  const repDetail = (rep, position) => ({
-    name: rep.name,
-    position: "MN " + position,
-    district: "District " + rep.district,
-    image: `https://www.gis.lcc.mn.gov/iMaps/districts/images/${position}/${rep.district}`,
-    url: `https://www.house.mn.gov/members/profile/${rep.memid}`,
+const configureStateReps = (res) => {
+  const houseRep = res?.features[0].properties;
+  const senateRep = res?.features[1].properties
+  return ([{
+    name: houseRep.name,
+    position: "MN House",
+    district: "District " + houseRep.district,
+    email: stateHouse?.[houseRep.district].email,
+    url: `https://www.house.mn.gov/members/profile/${houseRep.memid}`,
+    image: `https://www.gis.lcc.mn.gov/iMaps/districts/images/house/${houseRep.district}`,
     selected: false
-  })
-  return [
-    repDetail(res?.features[0].properties, "House"),
-    repDetail(res?.features[1].properties, "Senate")
-  ]
+  },
+  {
+    name: senateRep.name,
+    position: "MN Senate",
+    district: "District " + senateRep.district,
+    email: stateSenate?.[senateRep.district].email,
+    url: `https://www.senate.mn/members/member_bio.html?leg_id=${senateRep.memid}`,
+    image: `https://www.gis.lcc.mn.gov/iMaps/districts/images/senate/${senateRep.district}`,
+    selected: false
+  }
+  ])
 }
 
 const configureMetroReps = (res) => {
@@ -34,20 +44,23 @@ const configureMetroReps = (res) => {
   return ({
     name: rep.MEMBER,
     position: "Metropolitan Councilmember",
-    district: rep.MCDIST,
+    district: "District " + rep.MCDIST,
     email: rep.MC_EMAIL,
-    image: "",
+    url: localData.metro?.[rep.MCDIST].image || '',
+    image: localData.metro?.[rep.MCDIST].image || '',
     selected: false
   })
 };
 
 const configureWardReps = (res) => {
   const rep = res.features[0].attributes;
+  const ward = rep.ward.replace("Ward ", '');
   return ({
     name: rep.name.replace("Councilmember ", ""),
     position: "Saint Paul Councilmember",
     district: rep.ward,
     email: rep.email,
+    url: localData.metro?.[ward].url || '',
     image: rep.imgpath,
     selected: false
   })
@@ -58,10 +71,10 @@ const configureCommissionerReps = (res) => {
   return ({
     name: rep.Name,
     position: "Saint Paul Commissioner",
-    district: rep.District,
+    district: "District " + rep.District,
     email: rep.Email,
     url: rep.Web,
-    image: "",
+    image: localData.commissioner?.[rep.District]?.image || '',
     selected: false
   })
 }
@@ -78,19 +91,19 @@ export async function GET({ url: clientUrl }) {
 
   try {
     return Promise.all(urls.map((url) => fetchUrl(url)))
-    .then((res) => {  
-      const [stateRes, metroRes, wardRes, commissionerRes] = res;
+      .then((res) => {
+        const [stateRes, metroRes, wardRes, commissionerRes] = res;
 
-      const stateReps = stateRes?.features && stateRes?.features[0] && configureStateReps(stateRes);
-      const metroRep = metroRes?.features && metroRes?.features[0] && configureMetroReps(metroRes);
-      const wardRep = wardRes?.features && wardRes?.features[0] && configureWardReps(wardRes);
-      const commissionerRep = commissionerRes?.features && commissionerRes?.features[0] && configureCommissionerReps(commissionerRes);
+        const stateReps = stateRes?.features && stateRes?.features[0] && configureStateReps(stateRes);
+        const metroRep = metroRes?.features && metroRes?.features[0] && configureMetroReps(metroRes);
+        const wardRep = wardRes?.features && wardRes?.features[0] && configureWardReps(wardRes);
+        const commissionerRep = commissionerRes?.features && commissionerRes?.features[0] && configureCommissionerReps(commissionerRes);
 
-      const allReps = [...stateReps, metroRep, wardRep, commissionerRep]
-      console.log(allReps);
-      return json(allReps.filter(r => r));
-    })
-    .catch((err) => console.error(err));
+        const allReps = [...stateReps, metroRep, wardRep, commissionerRep]
+        console.log(allReps);
+        return json(allReps.filter(r => r));
+      })
+      .catch((err) => console.error(err));
   } catch (error) {
     console.error("There has been a server problem with your fetch operation:", error);
   }

@@ -12,4 +12,7 @@
   {#each $reps as person}
     <Person bind:person/>
   {/each}
+  {#if $reps.some(rep => rep.email === "")}
+    <p class="font-light">* Some of your representatives have chosen not to be reachable by public email. Please use the links provided to contact them.</p>
+  {/if}
 {/if}

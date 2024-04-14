@@ -1,4 +1,5 @@
 <script>
+  import LinkIcon from "../svgs/link-icon.svelte";
   export let person;
 </script>
 
@@ -12,11 +13,20 @@
     </svg>
   {/if}
   <div class="text">
-    <p class="name">{person.name}</p>
+    <div class="title">
+      <p class="name" style="padding: 4px 0px">{person.name}<b>{!person.email ? "*" : ""}</b></p>
+      <a href={person.url} target="_blank"><LinkIcon dimension={24} color={"var(--focus)"}/></a>
+    </div>
     <p>{person.position} - {person.district}</p>
   </div>
   <!-- <hr/> -->
-  <input type="checkbox" name="include" bind:checked={person.selected}>
+  {#if person.email}
+    <input type="checkbox" name="include" bind:checked={person.selected}>
+  {:else}
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="var(--tertiary)" class="bi bi-slash-circle-fill" viewBox="0 0 16 16">
+      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.646-2.646a.5.5 0 0 0-.708-.708l-6 6a.5.5 0 0 0 .708.708z"/>
+    </svg>
+  {/if}
 </div>
 
 <style>
@@ -43,6 +53,12 @@
     font-family: var(--oswald);
     font-size: 1.8rem;
     font-weight: 400;
+  }
+
+  & .title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem
   }
 }
 
@@ -72,17 +88,18 @@ input[type=checkbox] {
   border: 0;
   background-color: transparent;
   background-size: contain;
-  box-shadow: inset 0 0 0 1px var(--text);
+  box-shadow: inset 0 0 0 1px var(--tertiary);
 }
 
 [type=checkbox]:checked {
-  background-color: currentcolor;
+  background-color: var(--focus);
 }
 
 [type=checkbox]:checked::before {
   box-shadow: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath d='M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z' fill='%23ffffff' /%3E %3C/svg%3E");
 }
+
 
 
 </style>
