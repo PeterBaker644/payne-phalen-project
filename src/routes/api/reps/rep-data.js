@@ -1513,7 +1513,7 @@ export const stateSenate = [
     party: "DFL",
     address: "3231 Minnesota Senate Bldg. St. Paul, MN 55155",
     phone: "651-296-5285",
-    email: ""
+    email: "sen.foung.hawj@senate.mn"
   },
   {
     title: "Sen. Hoffman",

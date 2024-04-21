@@ -42,6 +42,7 @@
 		border-radius: 3.5rem;
 		border: none;
 		padding: var(--edge);
+    overflow-x: clip;
 	}
 	dialog::backdrop {
 		background: rgba(0, 0, 0, 0.3);
