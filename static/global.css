@@ -31,6 +31,10 @@
   --size: 3.5rem;
 }
 
+a {
+  color: var(--text);
+}
+
 html {
   font-size: 10px;
   font-family: var(--noto);

@@ -95,6 +95,8 @@
     padding: 2rem;
     gap: var(--space);
     color: white;
+    background: rgb(16,5,47);
+    background: linear-gradient(180deg, rgba(16,5,47,1) 0%, rgba(0,0,0,1) 100%);
   }
   img{
     max-width: 300px;
