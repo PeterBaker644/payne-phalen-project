@@ -7,7 +7,7 @@
   --background: #FFFFFF; /* #FFFFFF;*/
   --primary: #FAC34B; /*?*#ffe923; 78BE21 FFC845*/
   --secondary: #D9D9D9;
-  --tertiary: #020202;
+  --tertiary: #6D6D6D;
   --focus: #3f0bce; /* #4c0bce #712cf9; #5D295F */
 
   --orange: #F9AA45;
@@ -61,8 +61,15 @@ button {
   font-family: var(--bebas);
   font-size: 2.5rem;
   line-height: 2rem;
+  color: var(--text);
+  background-color: var(--primary);
 }
 
+button:disabled {
+  color: var(--tertiary);
+  background-color: var(--secondary);
+  cursor: not-allowed;
+}
 .form-box {
   display: grid;
   outline: none;
@@ -95,14 +102,7 @@ input:-webkit-autofill {
   -webkit-background-clip: text;
 }
 
-button {
-  background-color: var(--primary);
-}
 
-button:disabled {
-  background-color: var(--secondary);
-  cursor: not-allowed;
-}
 
 label {
   font-family: var(--oswald);

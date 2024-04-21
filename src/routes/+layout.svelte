@@ -57,7 +57,8 @@
     text-shadow: -4px 4px 0 var(--purple);
     text-transform: uppercase;
     transform: rotate(-2deg);
-    padding: 0rem 6rem;
+    margin: 0rem 6rem;
+    padding: 0rem 1rem;
   }
 
   .title {
@@ -101,17 +102,17 @@
   @media (min-width: 600px) {
     h1{
       text-align: center;
-      padding: 0rem;
+      margin: 0rem;
     }
   }
   @media (min-width: 500px) {
     h1{
-      padding: 0rem;
+      margin: 0rem;
     }
   }
-  @media (max-width: 400px) {
+  @media (max-width: 350px) {
     h1{
-      padding: 0rem;
+      margin: 0rem;
       font-size: 7rem;
       line-height: 6rem;
     }
