@@ -1,10 +1,10 @@
 <script>
   import ArrowIcon from "$lib/svgs/arrow-icon.svelte";
-  export let page, enable, onPress;
+  export let page, enable, onPress, message;
 </script>
 
 <button disabled={!enable} on:click={onPress}>
-  <span>{page === 'info' ? 'contact my representatives':'send my message'}</span>
+  <span>{message}</span>
   <ArrowIcon dimension={24} rotate={180}/>
 </button>
 
@@ -16,9 +16,9 @@
     justify-content: center;
     gap: 1rem;
     height: calc(var(--size) - 10px);
-
     border-radius: var(--size);
-    margin-top: 0.5rem;
+    margin: 0rem 2rem 2rem 2rem;
+    
     
     & span{
       line-height: calc(var(--size) - 10px);

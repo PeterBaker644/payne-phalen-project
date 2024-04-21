@@ -4,33 +4,50 @@
   import Step3 from "./_step-3.svelte";
   import Navigator from "./_navigator.svelte";
   import BigButton from "$lib/components/big-button.svelte";
-  import TextBlock from "$lib/components/text-block.svelte";
   import { page, repSelected, letterComplete } from './stores';
+  import Event from "./_event.svelte";
+    import Footer from "../lib/components/footer.svelte";
+    import Info from "./_info.svelte";
   $: navToContact = () => $page = 'contact';
+  $: navToInfo = () => $page = 'info';
 </script>
 
-<div>
+<div class="box">
   <Navigator/>
-  {#if $page === 'info'}
-    <TextBlock title={"The Project"}/>
-    <TextBlock title={"The Problem"}/>
-    <TextBlock title={"The Proposal"}/>
-    <BigButton bind:page={$page} enable bind:onPress={navToContact}/>
+  {#if $page === 'event'}
+    <Event/>
+    <BigButton message={"Learn about the issues"} bind:page={$page} enable bind:onPress={navToInfo}/>
+  {:else if $page === 'info'}
+    <Info/>
+    <BigButton message={"Contact my representatives"} bind:page={$page} enable bind:onPress={navToContact}/>
   {:else}
+  <div class="spaced">
     <Step1/>
     <hr/>
     <Step2/>
     <hr/>
     <Step3/>
-    <BigButton bind:page={$page} enable={$repSelected && $letterComplete}/>
+  </div>
+    <BigButton message={"Send my message"} bind:page={$page} enable={$repSelected && $letterComplete}/>
   {/if}
-
-</div>
-
+ 
+  </div>
+ <Footer/>
 
 <style>
   div {
     display: grid;
-    gap: var(--space);
   }
+  .box {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+  }
+
+  .spaced {
+    display: grid;
+    gap: 2rem;
+    padding: 2rem
+  }
+
 </style>

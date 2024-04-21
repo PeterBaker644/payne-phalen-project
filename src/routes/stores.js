@@ -53,7 +53,7 @@ const letterContent = {
   body: ""
 }
 
-export const page = writable('info');
+export const page = writable('event');
 export const user = writable(userInfo);
 export const reps = writable([]);
 export const letter = writable(letterContent);

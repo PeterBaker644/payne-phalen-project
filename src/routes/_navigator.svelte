@@ -1,26 +1,45 @@
 <script>
-	import Arrow from '$lib/svgs/arrow-icon.svelte';
-  import { page } from './stores';
-  $: selected = (p) => p === $page ? 'selected' : ''; 
+  import Arrow from "$lib/svgs/arrow-icon.svelte";
+  import { page } from "./stores";
+  $: selected = (p) => (p === $page ? "selected" : "");
 
+  const setAngle = (p) => (p === "info" ? 270 : p === "event" ? 0 : 180);
 </script>
 
 <div class="navigator">
-  <button on:click={() => $page = "info"} class={selected('info')}>The Info</button>
+  <div class="section">
+    <button on:click={() => ($page = "event")} class={selected("event")}
+      >The Event</button
+    >
     <div class="center">
       <p class="font-small">You Are Here</p>
-      <Arrow dimension={20} rotate={$page === "info" ? 0 : 180}/>
+      <Arrow dimension={20} rotate={setAngle($page)} />
     </div>
-  <button on:click={() => $page = "contact"} class={selected('contact')}>Contact Reps</button>
+    <button on:click={() => ($page = "contact")} class={selected("contact")}
+      >Contact Reps</button
+    >
+  </div>
+  <div class="section centered">
+    <button on:click={() => ($page = "info")} class={`${selected("info")}`}
+      >The Info</button
+    >
+  </div>
 </div>
 
 <style>
-
   .navigator {
+    padding-top: 2rem;
+  }
+  .section {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    padding-bottom: 1rem;
+
+    &.centered {
+      padding-bottom: 1rem;
+    }
   }
 
   .center {
@@ -28,7 +47,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
   }
 
   button {
@@ -42,10 +61,9 @@
     font-family: var(--bebas);
     font-weight: 400;
     font-size: 2rem;
-    
+
     &.selected {
       background-color: var(--primary);
     }
   }
-
 </style>

@@ -23,7 +23,7 @@
   {#if person.email}
     <input type="checkbox" name="include" bind:checked={person.selected}>
   {:else}
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="var(--tertiary)" class="bi bi-slash-circle-fill" viewBox="0 0 16 16">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="var(--bluish" class="bi bi-slash-circle-fill" viewBox="0 0 16 16">
       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.646-2.646a.5.5 0 0 0-.708-.708l-6 6a.5.5 0 0 0 .708.708z"/>
     </svg>
   {/if}
@@ -46,12 +46,12 @@
 .text {
   flex-grow: 1;
   display: grid;
-  font-family: var(--roboto);
+  font-family: var(--noto);
   font-size: 1.2rem;
   font-weight: 300;
   & .name {
     font-family: var(--oswald);
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 400;
   }
 
@@ -88,7 +88,7 @@ input[type=checkbox] {
   border: 0;
   background-color: transparent;
   background-size: contain;
-  box-shadow: inset 0 0 0 1px var(--tertiary);
+  box-shadow: inset 0 0 0 1px var(--focus);
 }
 
 [type=checkbox]:checked {
