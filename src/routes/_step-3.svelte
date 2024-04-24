@@ -12,11 +12,11 @@
       <input type="text" name="subject" id="subject" required bind:value={$letter.subject}/>
     </div>
     <div class="form-box">
-      <label for="body">Dear [Chosen Representative],</label>
+      <label for="body">Dear Representative,</label>
       <textarea name="body" id="body" rows="6" required bind:value={$letter.body}/> <!-- Need to save to local storage-->
     </div>
     <p>Sincerely,</p>
-    <p>{$user.name || "[Your Name Here]"}</p>
+    <p>{$user.entry.name || "[Your Name Here]"}</p>
   </form>
 {/if}
 

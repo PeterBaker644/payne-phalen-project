@@ -1,12 +1,13 @@
 <script>
   import Arrow from "$lib/svgs/arrow-icon.svelte";
+    import Microphone from "../lib/components/microphone.svelte";
   import { page } from "./stores";
   $: selected = (p) => (p === $page ? "selected" : "");
 
   const setAngle = (p) => (p === "info" ? 270 : p === "event" ? 0 : 180);
 </script>
 
-<div class="navigator">
+<div class="navigator" id="navigator">
   <div class="section">
     <button on:click={() => ($page = "event")} class={selected("event")}
       >The Event</button
@@ -24,11 +25,15 @@
       >The Info</button
     >
   </div>
+  <Microphone/>
 </div>
+
 
 <style>
   .navigator {
+    position: relative;
     padding-top: 2rem;
+    overflow-x: clip;
   }
   .section {
     display: flex;

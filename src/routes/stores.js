@@ -15,39 +15,6 @@ const userInfo = {
   coords: {},
 }
 
-const mockReps = [
-  {
-    name: "Atheena Hollins",
-    picture: "",
-    position: "MN House",
-    district: "District 66B"
-  },
-  {
-    name: "Clare Oumou Verbeten",
-    picture: "",
-    position: "MN Senate",
-    district: "District 66"
-  },
-  {
-    name: "Chai Lee",
-    picture: "",
-    position: "Metropolitan Council",
-    district: "District 13"
-  },
-  {
-    name: "HwaJeong Kim",
-    picture: "",
-    position: "Saint Paul Councilmember",
-    district: "Ward 5"
-  },
-  {
-    name: "Mai Chong Xiong",
-    picture: "",
-    position: "Saint Paul Commissioner",
-    district: "District 6"
-  },
-
-]
 const letterContent = {
   subject: "Reconsider the Rapid Transit Arcade Gully Stop",
   body: ""

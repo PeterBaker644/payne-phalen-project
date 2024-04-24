@@ -3,7 +3,13 @@
   export let page, enable, onPress, message;
 </script>
 
-<button disabled={!enable} on:click={onPress}>
+<button type="button" disabled={!enable} on:click={() => {
+    if (onPress) {
+      onPress()
+      console.log("test");
+    } 
+    document.getElementById('navigator').scrollIntoView()
+  }}>
   <span>{message}</span>
   <ArrowIcon dimension={24} rotate={180}/>
 </button>
