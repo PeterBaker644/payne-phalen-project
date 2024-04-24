@@ -15,7 +15,7 @@
   const composeMessage = (reps, letter, user) => {
     const repEmails = reps.filter(r=>r.email && r.email.length > 0).map(r => r.email);
     const userName = user.entry.name;
-    const href = `mailto:?bcc=${repEmails}&subject=${encodeURIComponent(letter.subject)}&body=Dear%20Respresentative%2C%0A%0A${encodeURIComponent(letter.body)}%0A%0ASincerely%2C%0A%0A${encodeURIComponent(userName)}`
+    const href = `mailto:?bcc=${repEmails}&subject=${encodeURIComponent(letter.subject)}&body=Dear%20Representative%2C%0A%0A${encodeURIComponent(letter.body)}%0A%0ASincerely%2C%0A%0A${encodeURIComponent(userName)}`
     console.log(repEmails.toString());
     console.log(href);
     window.open(href);
