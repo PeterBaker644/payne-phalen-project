@@ -46,18 +46,3 @@ export async function getReps(crds){
     console.error("There has been a problem with your fetch operation:", error);
   }
 }
-
-
-async function getCounty(location){
-  
-}
-
-async function getCity(location){
-
-}
-
-async function getMetro(location){
-  
-}
-
-const baseAddress3 = `https://maps.co.ramsey.mn.us/arcgis/rest/services/Elections/ElectionsAndPoliticalBoundaries/MapServer/11/query?f=json&returnGeometry=false&spatialRel=esriSpatialRelIntersects&geometry=%7B%22x%22%3A${-93.068459038089088}%2C%22y%22%3A${44.987262045778905}%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryPoint&inSR=4326&outFields=*&outSR=4326`

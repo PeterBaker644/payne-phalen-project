@@ -41,12 +41,13 @@ const configureStateReps = (res) => {
 
 const configureMetroReps = (res) => {
   const rep = res.features[0].attributes;
+  console.log('metroRep: ', rep)
   return ({
     name: rep.MEMBER,
     position: "Metropolitan Councilmember",
     district: "District " + rep.MCDIST,
     email: rep.MC_EMAIL,
-    url: localData.metro?.[rep.MCDIST].image || '',
+    url: localData.metro?.[rep.MCDIST].url || '',
     image: localData.metro?.[rep.MCDIST].image || '',
     selected: false
   })
@@ -60,7 +61,7 @@ const configureWardReps = (res) => {
     position: "Saint Paul Councilmember",
     district: rep.ward,
     email: rep.email,
-    url: localData.metro?.[ward].url || '',
+    url: localData.ward?.[ward].url || '',
     image: rep.imgpath,
     selected: false
   })
