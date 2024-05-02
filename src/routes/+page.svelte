@@ -13,9 +13,9 @@
   $: navToInfo = () => $page = 'info';
 
   const composeMessage = (reps, letter, user) => {
-    const repEmails = reps.filter(r=>r.email && r.email.length > 0).map(r => r.email);
-    const userName = user.entry.name;
-    const href = `mailto:?bcc=${repEmails}&subject=${encodeURIComponent(letter.subject)}&body=Dear%20Representative%2C%0A%0A${encodeURIComponent(letter.body)}%0A%0ASincerely%2C%0A%0A${encodeURIComponent(userName)}`
+    const repEmailsCommas = reps.filter(r=>r.email && r.email.length > 0).reverse().map(r => `<${r.email}>`);
+    const repEmails = repEmailsCommas.toString().replace(',',';');
+    const href = `mailto:?to=${encodeURIComponent(repEmails)}?cc=<district5@paynephalen.org>&subject=${encodeURIComponent(letter.subject)}&body=Dear%20Elected%20Official%2C%0A%0A${encodeURIComponent(letter.body)}%0A%0ASincerely%2C%0A%0A${encodeURIComponent(user.entry.name)}%0A${encodeURIComponent(user.entry.address)}%0A${encodeURIComponent(user.entry.email)}`
     console.log(repEmails.toString());
     console.log(href);
     window.open(href);
