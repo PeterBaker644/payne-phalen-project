@@ -1,5 +1,16 @@
 <script>
-  import { repSelected as selected, user, letter } from './stores'
+  import { repSelected as selected, user, letter, reps } from './stores'
+
+const copy = async (reps) => {
+    const repEmails = reps.filter(r=>r.email && r.email.length > 0).reverse().map(r => `${r.email}`);
+    console.log("Copying Emails")
+    try {
+        await navigator.clipboard.writeText(repEmails);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
 </script>
 
 <h3 style={$selected || "color: var(--secondary)"}>Step 3 - Make Your Voice Heard:</h3>
@@ -19,6 +30,10 @@
     <p>{$user.entry.address || ""}</p>
     <p>{$user.entry.email || ""}</p>
   </form>
+
+  <button class="small-button" type="button" on:click={() => copy($reps)}>
+    <span>Copy Emails To Clipboard</span>
+  </button>
 {/if}
 
 <style>
