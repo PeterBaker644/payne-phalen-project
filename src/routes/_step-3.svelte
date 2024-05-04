@@ -2,7 +2,7 @@
   import { repSelected as selected, user, letter, reps } from './stores'
 
 const copy = async (reps) => {
-    const repEmails = reps.filter(r=>r.email && r.email.length > 0).reverse().map(r => `${r.email}`);
+    const repEmails = reps.filter(r=>r.email && r.email.length > 0).reverse().map(r => `${r.email}`) + `;district5@paynephalen.org`;
     console.log("Copying Emails")
     try {
         await navigator.clipboard.writeText(repEmails);
