@@ -22,7 +22,7 @@ const configureStateReps = (res) => {
     name: houseRep.name,
     position: "MN House",
     district: "District " + houseRep.district,
-    email: stateHouse?.[houseRep.district].email,
+    email: stateHouse?.[houseRep.district]?.email || '',
     url: `https://www.house.mn.gov/members/profile/${houseRep.memid}`,
     image: `https://www.gis.lcc.mn.gov/iMaps/districts/images/house/${houseRep.district}`,
     selected: false
@@ -31,7 +31,7 @@ const configureStateReps = (res) => {
     name: senateRep.name,
     position: "MN Senate",
     district: "District " + senateRep.district,
-    email: stateSenate?.[senateRep.district].email,
+    email: stateSenate?.[senateRep.district]?.email || '',
     url: `https://www.senate.mn/members/member_bio.html?leg_id=${senateRep.memid}`,
     image: `https://www.gis.lcc.mn.gov/iMaps/districts/images/senate/${senateRep.district}`,
     selected: false
